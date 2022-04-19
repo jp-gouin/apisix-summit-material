@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: poc-front-app
+  name: poc-front-app
+  namespace: poc-front-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: poc-front-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: poc-front-app
+    spec:
+      containers:
+      - image: docker.io/jpgouin/front-app:1.0-rc4
+        imagePullPolicy: "Always"
+        name: poc-front-app
+        resources: {}
+        env:
+          - name: postAuthorUri
+            value: https://demo-api.demo.jpgouin.pro/api/author
+          #- name: extpostAuthorUri
+          #  value: http://demo-api.demo.jpgouin.pro/api/author
+          - name: postBookUri
+            value: https://demo-api.demo.jpgouin.pro/api/book
+          - name: authorsUri
+            value: https://demo-api.demo.jpgouin.pro/api/authors
+          #- name: extauthorsUri
+          #  value: http://demo-api.demo.jpgouin.pro/api/authors
+          - name: booksUri
+            value: https://demo-api.demo.jpgouin.pro/api/books
+          #- name: extbooksUri
+          #  value: http://demo-api.demo.jpgouin.pro/api/books
+          #- name: extpostBookUri
+          #  value: http://demo-api.demo.jpgouin.pro/api/book
+        ports:
+        - containerPort: 3000
+          name: api
+          protocol: TCP
+        - containerPort: 80
+          name: http
+          protocol: TCP
+      imagePullSecrets:
+      - name: harbor
+      
+status: {}

@@ -1,0 +1,17 @@
+# httpbin-route.yaml
+apiVersion: apisix.apache.org/v2beta2
+kind: ApisixRoute
+metadata:
+  name: httpserver-route
+  namespace: keycloak
+spec:
+  http:
+  - name: keycloak_rules
+    match:
+      hosts:
+      - sso.demo.jpgouin.pro
+      paths:
+      - /*
+    backends:
+       - serviceName: keycloak
+         servicePort: 80

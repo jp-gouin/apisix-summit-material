@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: poc-go-api
+  name: poc-go-api
+  namespace: poc-go-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: poc-go-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: poc-go-api
+    spec:
+      containers:
+      - image: jpgouin/app-go-api:1.0-rc1
+        name: poc-go-api
+        imagePullPolicy: "Always"
+        resources: {}
+        env:
+          - name: URLAPI1
+            value: https://jsonplaceholder.typicode.com/todos/1
+          - name: URLAPI2
+            value: https://jsonplaceholder.typicode.com/todos/2
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+      imagePullSecrets:
+      - name: harbor
+      
+      
+status: {}

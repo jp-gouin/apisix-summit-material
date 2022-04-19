@@ -1,0 +1,25 @@
+apiVersion: apisix.apache.org/v1
+kind: ApisixRoute
+metadata:
+  name: authkey-myawesomeapi
+  namespace: poc-go-api
+spec:
+  rules:
+  - host: authkey-myawesomeapi.pocpoc.poc
+    http:
+      paths:
+      - backend:
+          serviceName: poc-go-apisvc
+          servicePort: 80
+        path: /*
+        plugins:
+        - name: key-auth
+          enable: true
+        - name: consumer-restriction
+          enable: true
+          config:
+            allowed_by_methods:
+            - user: "esa"
+              methods: 
+              - "GET"
+

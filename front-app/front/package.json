@@ -1,0 +1,22 @@
+{
+  "name": "front-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt --port 3001",
+    "prod": "NODE_OPTIONS=-'-max-http-header-size=16384' nuxt --hostname '0' --port 3000",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.0",
+    "cookie-universal-nuxt": "^2.1.4",
+    "core-js": "^3.8.3",
+    "express": "^4.17.1",
+    "nuxt": "^2.14.12"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^3.4.2"
+  }
+}

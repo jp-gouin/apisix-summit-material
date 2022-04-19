@@ -1,0 +1,27 @@
+apiVersion: apisix.apache.org/v2beta2
+kind: ApisixRoute
+metadata:
+  name: myawesomeapp
+  namespace: poc-front-app
+spec:
+  http:
+  - name: poc-front-app_rules
+    match:
+      hosts:
+      - book-app.demo.jpgouin.pro
+      paths:
+      - /*
+    backends:
+       - serviceName: poc-front-appsvc
+         servicePort: 80
+    plugins:
+    - name: openid-connect
+      enable: true
+      config:
+        client_id: poc-apisix
+        client_secret: VgVPxP3UmTltBypcYAhWm6mflnmCtFtY
+        discovery: https://sso.demo.jpgouin.pro/auth/realms/apisix/.well-known/openid-configuration
+        realm: apisix
+        access_token_in_authorization_header: true
+        redirect_uri: "/redirect_uri"
+        ssl_verify: false

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: poc-go-api
+  name: poc-go-apisvc
+  namespace: poc-go-api
+spec:
+  ports:
+  - name: poc-go-apisvc
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: poc-go-api
+  type: ClusterIP
+status:
+  loadBalancer: {}

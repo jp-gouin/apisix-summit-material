@@ -1,0 +1,24 @@
+# httpbin-ingress.yaml
+# Note use apiVersion is networking.k8s.io/v1, so please make sure your
+# Kubernetes cluster version is v1.19.0 or higher.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: httpserver-ingress
+  namespace: apisix
+spec:
+  # apisix-ingress-controller is only interested in Ingress
+  # resources with the matched ingressClass name, in our case,
+  # it's apisix.
+  ingressClassName: apisix
+  rules:
+  - host: apisix-dashboard.demo.jpgouin.pro
+    http:
+      paths:
+      - backend:
+          service:
+            name: apisix-dashboard
+            port:
+              number: 80
+        path: /
+        pathType: Prefix

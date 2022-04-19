@@ -1,0 +1,18 @@
+apiVersion: apisix.apache.org/v2beta2
+kind: ApisixRoute
+metadata:
+  name: myawesomeapp
+  namespace: poc-front-app
+spec:
+  http:
+  - name: poc-front-app_rules
+    match:
+      hosts:
+      - book-app.demo.jpgouin.pro
+      paths:
+      - /*
+    backends:
+       - serviceName: poc-front-appsvc
+         servicePort: 80
+        
+

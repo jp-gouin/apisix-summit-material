@@ -1,0 +1,6 @@
+FROM node:12.2.0-alpine
+WORKDIR /app
+COPY . /app
+RUN npm install -g @vue/cli && npm install --silent
+RUN ls -all /app
+CMD ["/usr/local/bin/npm","run","prod"]

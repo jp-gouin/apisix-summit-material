@@ -1,0 +1,27 @@
+apiVersion: apisix.apache.org/v2beta2
+kind: ApisixRoute
+metadata:
+  name: myawesomeapi
+  namespace: poc-go-api
+spec:
+  http:
+  - name: poc-back-app_rules
+    match:
+      hosts:
+      - demo-api.demo.jpgouin.pro
+      paths:
+      - /*
+    backends:
+      - serviceName: poc-go-apisvc
+        servicePort: 80
+    plugins:
+      - name: cors
+        enable: true
+        config:
+          allow_credential: true
+          allow_origins: "**"
+          allow_origins_by_regex: [".*.demo.jpgouin.pro"]
+          allow_methods: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
+          expose_headers: X-PINGOTHER, Content-Type, Authorization
+          allow_headers: X-PINGOTHER, Content-Type, Authorization
+

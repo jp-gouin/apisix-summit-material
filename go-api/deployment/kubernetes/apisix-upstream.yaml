@@ -1,0 +1,9 @@
+apiVersion: apisix.apache.org/v1
+kind: ApisixUpstream
+metadata:
+  name: poc-go-apiupstream
+  namespace: poc-go-api
+spec:
+  ports:
+  - port: 80
+  
